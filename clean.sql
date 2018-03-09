@@ -1,0 +1,9 @@
+drop table `escapade`.`stay`;
+drop table `escapade`.`car`;
+drop table `escapade`.`client`;
+drop table `escapade`.`housing`;
+drop table `escapade`.`parking`;
+drop table `escapade`.`supervisor`;
+drop table `escapade`.`deal`;
+drop table `escapade`.`maintenance`;
+drop database `escapade`;
