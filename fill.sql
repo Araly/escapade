@@ -4,7 +4,7 @@ insert into `escapade`.`stay` (`id`, `theme`) values (0, 's95');
 
 -- insertions in table car
 
-insert into `escapade`.`car` (`id`, `brand`, `type`, `model`, `available`, `id_supervisor`, `parkingSpace`, id_parking`) values (0, 'Maze', 'berline', 'Quat', 1, 0, 'A0', 0);
+insert into `escapade`.`car` (`id`, `brand`, `type`, `model`, `available`, `id_supervisor`, `parkingSpace`, `id_parking`) values (0, 'Maze', 'berline', 'Quat', 1, 0, 'A0', 0);
 
 -- insertions in table client
 
