@@ -2,15 +2,15 @@ create database `escapade`;
 use escapade;
 
 create table `escapade`.`stay` (
-	`id` int not null auto_increment, 
+	`id` int not null auto_increment,
 	`theme` varchar(3) not null,
 	primary key (`id`) );
 
 create table `escapade`.`car` (
 	`id` varchar(10) not null,
-	`brand` varchar(20) not null,
+	`brand` varchar(50) not null,
 	`type` enum('berline', 'cabriolet') not null,
-	`model` varchar(20) not null,
+	`model` varchar(50) not null,
 	`available` bit not null,
 	`id_supervisor` int not null,
 	`parkingSpace` enum('A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9'),
@@ -26,9 +26,9 @@ create table `escapade`.`client` (
 	`email` varchar(20) not null,
 	primary key (`id`) );
 
-create table `escapade`.`housing` ( 
+create table `escapade`.`housing` (
 	`id` int not null auto_increment,
-	`name` varchar(10),
+	`name` varchar(50),
 	`theme` varchar(3) not null,
 	primary key (`id`) );
 
@@ -47,8 +47,8 @@ create table `escapade`.`deal` (
 
 create table `escapade`.`supervisor` (
 	`id` int not null auto_increment,
-	`firstname` varchar(10) not null,
-	`lastname` varchar(10) not null,
+	`firstname` varchar(20) not null,
+	`lastname` varchar(20) not null,
 	primary key (`id`) );
 
 create table `escapade`.`parking` (
