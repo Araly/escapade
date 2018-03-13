@@ -65,3 +65,4 @@ create table `escapade`.`maintenance` (
 	`year` int not null,
 	`done` bit not null,
 	primary key (`id`) );
+
