@@ -15,7 +15,7 @@ update car set available = 1 where id = {$immatriculation};
 --8
 select count(id) from car group by id_supervisor;
 --9
-select car.idi, maintenance.cause from car join maintenance on maintenance.id_car = car.id where done = 0;
+select car.id, maintenance.cause from car join maintenance on maintenance.id_car = car.id where done = 0;
 --10
 update car set available = 0 where car.id = {$immatriculation};
 insert into maintenance (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values ({$immatriculation}, {$cause}, {$intervention}, {$week}, {$year}, {$done});
