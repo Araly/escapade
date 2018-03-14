@@ -53,6 +53,8 @@ create table `escapade`.`supervisor` (
 
 create table `escapade`.`parking` (
 	`id` int not null auto_increment,
+	`name` varchar(50) not null,
+	`adress` varchar(100) not null,
 	`theme` varchar(3) not null,
 	primary key (`id`) );
 

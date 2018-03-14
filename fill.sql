@@ -41,13 +41,28 @@ insert into `escapade`.`housing` (`name`, `theme`) values ('capsule house', 'j03
 
 -- insertions in table parking
 
-insert into `escapade`.`parking` (`theme`) values ('01');
-insert into `escapade`.`parking` (`theme`) values ('02');
-insert into `escapade`.`parking` (`theme`) values ('03');
-insert into `escapade`.`parking` (`theme`) values ('04');
-insert into `escapade`.`parking` (`theme`) values ('05');
-insert into `escapade`.`parking` (`theme`) values ('06');
-insert into `escapade`.`parking` (`theme`) values ('07');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Rivoli', '2 Rue Boucher', '01');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Rivoli', '2 Rue Boucher', '02');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Beaubourg', '31 Rue Beaubourg', '03');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Lobau', '4 Rue Lobau', '04');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Soufflot', '22 Rue Soufflot', '05');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Jardin des plantes', '25 Rue Geoffroy-Saint-Hilaire', '06');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Maubourg', '45 Quai d Orsay', '07');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Champs-Elysees', '77 Avenue Marceau', '08');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Pigalle', '10 Rue Jean-Baptiste Pigalle', '09');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Lariboisiere', '1 bis Rue Ambroise Pare', '10');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Oberkampf', '11 Rue Ternaux', '11');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Gare de Lyon', '6 Rue de Rambouillet', '12');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Italie', '25 Rue Stephen Pichon', '13');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Raspail', '120 Boulevard Montparnasse', '14');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Beaugrenelle', '5 Quai Andre Citroen', '15');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Victor Hugo', '75 Avenue Victor Hugo', '16');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Ternes', '38 Avenue des Ternes', '17');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Stalingrad', '13 Rue d Aubervillier', '18');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Philharmonie', '185 Boulevard Serurier', '19');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Rosa Parks', '157 Boulevard Macdonald', '20');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Orly', 'Orly Airport', '21');
+insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Roissy', 'Roissy Airport', '22');
 
 -- insertions in table supervisor
 
@@ -64,7 +79,7 @@ insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `
 
 -- insertions in table maintenance
 
-insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values (0, 'goku doesn\'t have a driving licence', 'replaced everything', 12, 2018, 1);
-insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values (0, 'la radio a explosé', 'replaced everything', 12, 2018, 1);
-insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values (1, 'goku doesn\'t have a driving licence', 'replaced everything', 12, 2018, 1);
+insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values ('OU642EF', 'goku doesn t have a driving licence', 'replaced everything', 13, 2018, 1);
+insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values ('OU642EF', 'la radio a explosé', 'replaced radio', 12, 2018, 1);
+insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values ('GF6454GD', 'goku let gohan drive', 'replaced everything', 12, 2018, 0);
 
