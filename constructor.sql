@@ -1,6 +1,9 @@
 create database `escapade`;
 use escapade;
 
+create user 'escapade'@'localhost';
+grant all privileges on escapade.* to 'escapade'@'localhost' identified by 'esilv';
+
 create table `escapade`.`stay` (
 	`id` int not null auto_increment,
 	`theme` varchar(3) not null,
