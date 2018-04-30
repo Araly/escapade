@@ -6,12 +6,13 @@ namespace Escapade
 		int id;
 		string firstname;
 		string lastname;
-        public Supervisor(string firstname, string lastname)
+        public Supervisor(int id, string firstname, string lastname)
         {
+			this.id = id;
 			this.firstname = firstname;
 			this.lastname = lastname;
         }
-		public Supervisor() : this("N/C","N/C")
+		public Supervisor() : this(-1,"N/C","N/C")
 		{
 			
 		}
