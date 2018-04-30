@@ -21,14 +21,26 @@ namespace Escapade
 			{
 				const string DEMO_PHONE_NUMBER = "0782453482";
 				const string DEMO_EMAIL = "adrien.kerisit@devinci.fr";
-				Client demonstration = new Client("Adrien", "Kerisit", "ESILV, La defense", "visite de la défense", 2018, 14);
+
 				string connexionString = "SERVER=localhost;PORT=3306;DATABASE= escapade;UID=escapade;PASSWORD=esilv;SslMode=none";
-				MySqlConnection connexion = new MySqlConnection(connexionString);
-				Demo1(demonstration);
+                MySqlConnection connexion = new MySqlConnection(connexionString);              
+
+				Deal demonstration = null;
+                XmlSerializer xs = new XmlSerializer(typeof(Deal));
+                StreamReader rd = new StreamReader("M1.xml");
+                demonstration = xs.Deserialize(rd) as Deal;
+                rd.Close();
+
+				if (demonstration != null && demonstration.Client != null && demonstration.Sejour != null)
+				{
+					Console.WriteLine(demonstration.Sejour.Theme);
+					//+ " " + demonstration.Client.Lastname + " " + demonstration.Client.Adress + " " + demonstration.Sejour.Theme + " " + demonstration.Week + " " + demonstration.Year
+					Demo1(demonstration.Client);
+				}
 				connexion.Open();
-				string [] queryResult = Query_mysql_server(connexion, "select count(id) from client where firstname ='" + demonstration.Firstname + "' and lastname ='" + demonstration.Lastname + "';");
-				int result = int.Parse(queryResult[0]);
+				string [] queryResult = Query_mysql_server(connexion, "select count(id) from client where firstname ='" + demonstration.Client.Firstname + "' and lastname ='" + demonstration.Client.Lastname + "';");
 				connexion.Close();
+				int result = int.Parse(queryResult[0]);            
 				if(result == 0)
 				{
 					Console.WriteLine("Vous n'avez pas de compte actuellement, merci de répondre à quelques questions afin que nous puissions vous créer un compte \n\nVeuillez indiquer votre numero de telephone\n");
@@ -36,42 +48,61 @@ namespace Escapade
 					Console.WriteLine("\n\n Veuillez renseigner votre email \n");
 					TypeLine(DEMO_EMAIL);
 					connexion.Open();
-					queryResult = Query_mysql_server(connexion, "insert into escapade.client(firstname, lastname, phone, adress, email) values('" + demonstration.Firstname +"', '" + demonstration.Lastname + "', '" + DEMO_PHONE_NUMBER + "', '" + demonstration.Adress + "', '" + DEMO_EMAIL + "');" );
+					Console.WriteLine("insert into escapade.client(firstname, lastname, phone, adress, email) values('" + demonstration.Client.Firstname + "', '" + demonstration.Client.Lastname + "', '" + DEMO_PHONE_NUMBER + "', '" + demonstration.Client.Adress + "', '" + DEMO_EMAIL + "');");
+					queryResult = Query_mysql_server(connexion, "insert into escapade.client(firstname, lastname, phone, adress, email) values('" + demonstration.Client.Firstname +"', '" + demonstration.Client.Lastname + "', '" + DEMO_PHONE_NUMBER + "', '" + demonstration.Client.Adress + "', '" + DEMO_EMAIL + "');" );
 					connexion.Close();
 					Console.WriteLine("Enregistrement terminé !");
 				}
 				else if(result == 1)
 				{
 					connexion.Open();
-					queryResult = Query_mysql_server(connexion, "select id from client where firstname ='" + demonstration.Firstname + "' and lastname ='" + demonstration.Lastname + "';");
-					int id_client = int.Parse(queryResult[0]);
+					queryResult = Query_mysql_server(connexion, "select id from client where firstname ='" + demonstration.Client.Firstname + "' and lastname ='" + demonstration.Client.Lastname + "';");
 					connexion.Close();
+					int id_client = int.Parse(queryResult[0]);
 					Console.WriteLine("Succès, votre identifiant client est : " + id_client);
+				}                
+
+				Console.WriteLine("Nous vous cherchons une voiture dans le secteur");
+				TypeLine("...");              
+				connexion.Open();
+				queryResult = Query_mysql_server(connexion, "select * from car c inner join parking p on c.id_parking = p.theme where p.theme = '" + demonstration.Sejour.Theme + "' and c.available = true;");
+				connexion.Close();
+				if(queryResult.Length>0)
+				{
+					Console.WriteLine("Voiture disponible trouvée !");
+					string[] temp = queryResult[0].Split(',');
+					int id_tmp = int.Parse(temp[0]);
+					bool av_tmp = bool.Parse(temp[4]);
+					//Supervisor superviseur = new Supervisor()
+					//Car voiture = new Car(temp[0],temp[1],temp[2],temp[3],temp[])
 				}
-				XmlSerializer xs = new XmlSerializer(typeof(Client));  // l'outil de sérialisation
-                StreamWriter wr = new StreamWriter("M1.xml");  // accès en écriture à un fichier (texte)
-				xs.Serialize(wr, demonstration); // action de sérialiser en XML l'objet
-                                        // et d'écrire le résultat dans le fichier manipulé par wr
-                wr.Close();
+				else
+				{
+					Console.WriteLine("Pas de chance, il n'y a aucune voiture disponible dans votre secteur");
+					TypeLine("...");
+					Console.WriteLine("Nous élargissons nos champs de recherche");
+					TypeLine("...");
+				}
+           
 			}
 			catch(MySqlException ex)
+			{
+				Console.WriteLine("Error :" + ex.ToString());
+			}
+			catch (InvalidOperationException ex)
+            {
+				Console.WriteLine("Error :" + ex.ToString());
+            }
+			catch (NullReferenceException ex)
 			{
 				Console.WriteLine("Error :" + ex.ToString());
 			}
         }
         public static void Demo1(Client c)
 		{
-			Console.WriteLine("Bienvenue à l'agence de voyage Escapade !\n");
-            Console.WriteLine("\nVeuillez indiquer votre nom :\n");
-			TypeLine(c.Firstname + ' ' + c.Lastname);
-            Console.WriteLine("\n\nExcellent, maintenant votre adresse :\n");
-			TypeLine(c.Adress);
-            Console.WriteLine("\n\nParfait, veuillez à présent préciser le thème de votre séjour :\n");
-			TypeLine(c.Stay);
-            Console.WriteLine("\n\nPresque fini, quelles sont vos dates ?\n");
-			TypeLine("Semaine " + c.Week + ", Année " + c.Year);
+			Console.WriteLine("Bonjour " + c.Firstname + " " + c.Lastname + ", et bienvenue à l'agence de voyage Escapade !\n");
             Console.WriteLine("\nNous interrogeons notre base de donnée");
-			TypeLine("...")
+			TypeLine("...");
 		}
 		public static string[] Query_mysql_server(MySqlConnection connexion, string query)
 		{

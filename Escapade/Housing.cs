@@ -11,6 +11,10 @@ namespace Escapade
 			this.name = name;
 			this.theme = theme;
         }
+		public Housing() : this("N/C","N/C")
+		{
+			
+		}
         public string Name
 		{
 			get { return name; }

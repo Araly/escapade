@@ -4,20 +4,24 @@ namespace Escapade
 	public class Maintenance
 	{
 		int id;
-		Car voiture;
+		Car car;
 		string cause;
 		string intervention;
 		int week;
 		int year;
 		bool done;
-		public Maintenance(Car voiture, string cause, string intervention, int week, int year, bool done)
+		public Maintenance(Car car, string cause, string intervention, int week, int year, bool done)
 		{
-			this.voiture = voiture;
+			this.car = car;
 			this.cause = cause;
 			this.intervention = intervention;
 			this.week = week;
 			this.year = year;
 			this.done = done;
+		}
+		public Maintenance() : this(null, "N/C", "N/C" ,0, 0, false)
+		{
+			
 		}
 		public int Id
 		{
@@ -36,8 +40,8 @@ namespace Escapade
 		}
 		public Car Voiture
 		{
-			get { return voiture; }
-			set { voiture = value; }
+			get { return car; }
+			set { car = value; }
 		}
 		public string Cause
 		{
@@ -56,7 +60,7 @@ namespace Escapade
 		}
 		public override string ToString()
 		{
-			return "cause : " + cause + ", intervention : " + intervention + ", semaine : " + week + ", année : " + year + ", disponible : " + done + ", Voiture : " + voiture.ToString();
+			return "cause : " + cause + ", intervention : " + intervention + ", semaine : " + week + ", année : " + year + ", disponible : " + done + ", Voiture : " + car.ToString();
 		}
 	}
 }

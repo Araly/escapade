@@ -8,6 +8,10 @@ namespace Escapade
         {
 			this.theme = theme;
         }
+		public Stay() : this("N/C")
+		{
+			
+		}
         public string Theme
 		{
 			get { return theme; }
@@ -15,7 +19,7 @@ namespace Escapade
 		}
 		public override string ToString()
 		{
-			return "Sejour : " + theme;
+			return "Sejour : " + theme + "ème arrondissement";
 		}
 	}
 }

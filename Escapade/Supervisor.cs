@@ -11,6 +11,10 @@ namespace Escapade
 			this.firstname = firstname;
 			this.lastname = lastname;
         }
+		public Supervisor() : this("N/C","N/C")
+		{
+			
+		}
 		public string Firstname
         {
             get { return firstname; }

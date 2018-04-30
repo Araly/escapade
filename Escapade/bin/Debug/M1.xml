@@ -1,9 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Client xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Firstname>Goku</Firstname>
-  <Lastname>Son</Lastname>
-  <Adress>ESILV, La defense</Adress>
-  <Stay>visite de la défense</Stay>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE Deal [
+ <!ELEMENT Deal (Client+, Stay+, Year+, Week+)+>
+ <!ELEMENT Client (Firstname+, Lastname+, Adress+)+>
+ <!ELEMENT Stay (Theme+)+>
+ <!ELEMENT Year (#PCDATA)>
+ <!ELEMENT Week (#PCDATA)>
+ <!ELEMENT Theme (#PCDATA)>
+ <!ELEMENT Firstname (#PCDATA)>
+ <!ELEMENT Lastname (#PCDATA)>
+ <!ELEMENT Adress (#PCDATA)>
+]>
+<Deal>
+  <Client>
+    <Firstname>Adrien</Firstname>
+    <Lastname>Kerisit</Lastname>
+    <Adress>ESILV, La defense</Adress>
+  </Client>
+  <Stay>
+    <Theme>visite de la defense</Theme>
+  </Stay>
   <Year>2018</Year>
   <Week>14</Week>
-</Client>
+</Deal>

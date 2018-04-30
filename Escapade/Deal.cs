@@ -4,27 +4,31 @@ namespace Escapade
     public class Deal
     {
 		int id;
-		Stay sejour;
-		Car voiture;
+		Stay stay;
+		Car car;
 		Client client;
-		Housing residence;
+		Housing housing;
 		int price;
 		int week;
 		int year;
 		int rating;
 		string ratingDescription;
-		public Deal(Stay sejour, Car voiture, Client client, Housing residence, int price, int week, int year, int rating, string ratingDescription)
+		public Deal(Stay stay, Car car, Client client, Housing housing, int price, int week, int year, int rating, string ratingDescription)
         {
-			this.sejour = sejour;
-			this.voiture = voiture;
+			this.stay = stay;
+			this.car = car;
 			this.client = client;
-			this.residence = residence;
+			this.housing = housing;
 			this.price = price;
 			this.week = week;
 			this.year = year;
 			this.rating = rating;
 			this.ratingDescription = ratingDescription;
         }
+		public Deal() : this(null,null,null,null,0,0,0,0,"N/C")
+		{
+			
+		}
 		public int Id
         {
             get { return id; }
@@ -40,20 +44,20 @@ namespace Escapade
             get { return week; }
             set { week = value; }
         }
-        public Car Voiture
+        public Car Car
         {
-            get { return voiture; }
-            set { voiture = value; }
+            get { return car; }
+            set { car = value; }
         }
 		public Stay Sejour
 		{
-			get { return sejour; }
-			set { sejour = value; }
+			get { return stay; }
+			set { stay = value; }
 		}
 		public Housing Residence
 		{
-			get { return residence; }
-			set { residence = value; }
+			get { return housing; }
+			set { housing = value; }
 		}
 		public Client Client
 		{
@@ -77,7 +81,7 @@ namespace Escapade
 		}
 		public override string ToString()
 		{
-			return "sejour : " + sejour.ToString() + ", residence : " + residence.ToString() + ", client : " + client.ToString() + ", voiture : " + voiture.ToString() + ", prix : " + price + ", note : " + rating + ", commentaires du client : " + ratingDescription;
+			return "sejour : " + stay.ToString() + ", residence : " + housing.ToString() + ", client : " + client.ToString() + ", voiture : " + car.ToString() + ", prix : " + price + ", note : " + rating + ", commentaires du client : " + ratingDescription;
 		}
 	}
 }

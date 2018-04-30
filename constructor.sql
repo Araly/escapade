@@ -1,7 +1,7 @@
 create database `escapade`;
 use escapade;
 
-create user 'escapade'@'localhost';
+create user if not exists 'escapade'@'localhost';
 grant all privileges on escapade.* to 'escapade'@'localhost' identified by 'esilv';
 
 create table `escapade`.`stay` (
@@ -26,7 +26,7 @@ create table `escapade`.`client` (
 	`lastname` varchar(20) not null,
 	`phone` varchar(12) not null,
 	`adress` varchar(100) not null,
-	`email` varchar(20) not null,
+	`email` varchar(50) not null,
 	primary key (`id`) );
 
 create table `escapade`.`housing` (
