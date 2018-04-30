@@ -11,8 +11,9 @@ namespace Escapade
 		string parking_space;
 		Supervisor supervisor;
 		Parking parking;
-		public Car(int id,string brand, string type, string model, bool available, Supervisor supervisor, string parking_space, Parking parking)
+		public Car(string id,string brand, string type, string model, bool available, Supervisor supervisor, string parking_space, Parking parking)
         {
+			this.id = id;
 			this.model = model;
 			this.brand = brand;
 			this.type = type;
@@ -21,7 +22,7 @@ namespace Escapade
 			this.supervisor = supervisor;
 			this.parking = parking;
         }
-		public Car() : this(0,"N/C","N/C","N/C",false,null,"N/C",null)
+		public Car() : this("N/C","N/C","N/C","N/C",false,null,"N/C",null)
 		{
 			
 		}

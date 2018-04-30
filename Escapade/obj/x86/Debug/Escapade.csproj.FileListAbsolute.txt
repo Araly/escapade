@@ -8,3 +8,4 @@
 /home/akeris/Projects/Escapade/Escapade/obj/x86/Debug/Escapade.csproj.CoreCompileInputs.cache
 /home/akeris/Projects/Escapade/Escapade/obj/x86/Debug/Escapade.exe
 /home/akeris/Projects/Escapade/Escapade/obj/x86/Debug/Escapade.pdb
+/home/akeris/Projects/Escapade/Escapade/obj/x86/Debug/Escapade.csprojResolveAssemblyReference.cache

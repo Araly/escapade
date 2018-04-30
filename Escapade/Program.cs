@@ -22,7 +22,7 @@ namespace Escapade
 				const string DEMO_PHONE_NUMBER = "0782453482";
 				const string DEMO_EMAIL = "adrien.kerisit@devinci.fr";
 
-				string connexionString = "SERVER=localhost;PORT=3306;DATABASE= escapade;UID=escapade;PASSWORD=esilv;SslMode=none";
+				string connexionString = "SERVER=localhost;PORT=3306;DATABASE= escapade;UID=akeris;SslMode=none";
                 MySqlConnection connexion = new MySqlConnection(connexionString);              
 
 				Deal demonstration = null;
@@ -31,10 +31,8 @@ namespace Escapade
                 demonstration = xs.Deserialize(rd) as Deal;
                 rd.Close();
 
-				if (demonstration != null && demonstration.Client != null && demonstration.Sejour != null)
+				if (demonstration != null && demonstration.Client != null && demonstration.Stay != null)
 				{
-					Console.WriteLine(demonstration.Sejour.Theme);
-					//+ " " + demonstration.Client.Lastname + " " + demonstration.Client.Adress + " " + demonstration.Sejour.Theme + " " + demonstration.Week + " " + demonstration.Year
 					Demo1(demonstration.Client);
 				}
 				connexion.Open();
@@ -48,7 +46,6 @@ namespace Escapade
 					Console.WriteLine("\n\n Veuillez renseigner votre email \n");
 					TypeLine(DEMO_EMAIL);
 					connexion.Open();
-					Console.WriteLine("insert into escapade.client(firstname, lastname, phone, adress, email) values('" + demonstration.Client.Firstname + "', '" + demonstration.Client.Lastname + "', '" + DEMO_PHONE_NUMBER + "', '" + demonstration.Client.Adress + "', '" + DEMO_EMAIL + "');");
 					queryResult = Query_mysql_server(connexion, "insert into escapade.client(firstname, lastname, phone, adress, email) values('" + demonstration.Client.Firstname +"', '" + demonstration.Client.Lastname + "', '" + DEMO_PHONE_NUMBER + "', '" + demonstration.Client.Adress + "', '" + DEMO_EMAIL + "');" );
 					connexion.Close();
 					Console.WriteLine("Enregistrement terminé !");
@@ -59,29 +56,48 @@ namespace Escapade
 					queryResult = Query_mysql_server(connexion, "select id from client where firstname ='" + demonstration.Client.Firstname + "' and lastname ='" + demonstration.Client.Lastname + "';");
 					connexion.Close();
 					int id_client = int.Parse(queryResult[0]);
-					Console.WriteLine("Succès, votre identifiant client est : " + id_client);
+					Console.WriteLine("Succès, votre identifiant client est : " + id_client+"\n");
 				}                
 
-				Console.WriteLine("Nous vous cherchons une voiture dans le secteur");
-				TypeLine("...");              
-				connexion.Open();
-				queryResult = Query_mysql_server(connexion, "select * from car c inner join parking p on c.id_parking = p.theme where p.theme = '" + demonstration.Sejour.Theme + "' and c.available = true;");
+				Console.WriteLine("Nous vous cherchons une voiture dans le secteur\n");              
+				connexion.Open(); 
+				queryResult = Query_mysql_server(connexion, "select * from car c inner join parking p on c.id_parking = p.theme where p.theme = '" + demonstration.Stay.Theme + "' and c.available = true;");
 				connexion.Close();
-				if(queryResult.Length>0)
+				if(queryResult[0]!=null)
 				{
-					Console.WriteLine("Voiture disponible trouvée !");
-					string[] temp = queryResult[0].Split(',');
-					int id_tmp = int.Parse(temp[0]);
-					bool av_tmp = bool.Parse(temp[4]);
-					//Supervisor superviseur = new Supervisor()
-					//Car voiture = new Car(temp[0],temp[1],temp[2],temp[3],temp[])
+					Console.WriteLine("Voiture disponible trouvée !\n");
 				}
 				else
 				{
-					Console.WriteLine("Pas de chance, il n'y a aucune voiture disponible dans votre secteur");
-					TypeLine("...");
-					Console.WriteLine("Nous élargissons nos champs de recherche");
-					TypeLine("...");
+					Console.WriteLine("Pas de chance, il n'y a aucune voiture disponible dans votre secteur\n");
+					Console.WriteLine("Nous élargissons notre champ de recherche\n");
+					connexion.Open();
+					queryResult = Query_mysql_server(connexion, "select * from car where available = true limit 1;");
+					connexion.Close();
+				}
+				if (queryResult[0] != null)
+				{
+					Console.WriteLine("Voiture trouvée :\n");
+					string[] temp = queryResult[0].Split(',');
+					bool av = false;
+					int av_tmp = int.Parse(temp[4]);
+					if (av_tmp == 1) { av = true; }
+					connexion.Open();
+					queryResult = Query_mysql_server(connexion, "select firstname, lastname from supervisor s inner join car c on s.id = c.id_supervisor where c.id = '" + temp[0] + "';");
+					connexion.Close();
+					string[] temp2 = queryResult[0].Split(',');
+					Supervisor superviseur = new Supervisor(temp2[0], temp2[1]);
+					connexion.Open();
+					queryResult = Query_mysql_server(connexion, "select p.id, theme from parking p inner join car c on p.id = c.id_parking where c.id_parking ='" + temp[7] + "';");
+					connexion.Close();
+					string[] temp3 = queryResult[0].Split(',');
+					Parking parking = new Parking(int.Parse(temp3[0]), temp3[1]);
+					Car voiture = new Car(temp[0], temp[1], temp[2], temp[3],av , superviseur, temp[6], parking);
+					Console.WriteLine(voiture.ToString());
+				}
+				else
+				{
+					Console.WriteLine("Nous sommes désolés, aucune voiture n'est disponible..\n");
 				}
            
 			}
@@ -95,14 +111,13 @@ namespace Escapade
             }
 			catch (NullReferenceException ex)
 			{
-				Console.WriteLine("Error :" + ex.ToString());
+				Console.WriteLine("Error :" + ex.ToString());              
 			}
         }
         public static void Demo1(Client c)
 		{
 			Console.WriteLine("Bonjour " + c.Firstname + " " + c.Lastname + ", et bienvenue à l'agence de voyage Escapade !\n");
             Console.WriteLine("\nNous interrogeons notre base de donnée");
-			TypeLine("...");
 		}
 		public static string[] Query_mysql_server(MySqlConnection connexion, string query)
 		{

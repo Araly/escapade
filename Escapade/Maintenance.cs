@@ -19,7 +19,7 @@ namespace Escapade
 			this.year = year;
 			this.done = done;
 		}
-		public Maintenance() : this(null, "N/C", "N/C" ,0, 0, false)
+		public Maintenance() : this(null, "N/C", "N/C", -1, -1, false)
 		{
 			
 		}

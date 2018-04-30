@@ -5,11 +5,11 @@ namespace Escapade
 	{
 		int id;
 		string theme;
-		public Parking(string theme)
+		public Parking(int id, string theme)
 		{
 			this.theme = theme;
 		}
-		public Parking() : this("N/C")
+		public Parking() : this(-1,"N/C")
 		{
 			
 		}
@@ -25,7 +25,7 @@ namespace Escapade
         }
 		public override string ToString()
 		{
-			return theme;
+			return "id : " + id + ", theme :" + theme;
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace Escapade
 			this.rating = rating;
 			this.ratingDescription = ratingDescription;
         }
-		public Deal() : this(null,null,null,null,0,0,0,0,"N/C")
+		public Deal() : this(null,null,null,null,-1,-1,-1,-1,"N/C")
 		{
 			
 		}
@@ -49,12 +49,12 @@ namespace Escapade
             get { return car; }
             set { car = value; }
         }
-		public Stay Sejour
+		public Stay Stay
 		{
 			get { return stay; }
 			set { stay = value; }
 		}
-		public Housing Residence
+		public Housing Housing
 		{
 			get { return housing; }
 			set { housing = value; }
