@@ -19,7 +19,9 @@ namespace Escapade
         {
 			try
 			{
-				Client demonstration = new Client("Goku", "Son", "ESILV, La defense", "visite de la défense", 2018, 14);
+				const string DEMO_PHONE_NUMBER = "0782453482";
+				const string DEMO_EMAIL = "adrien.kerisit@devinci.fr";
+				Client demonstration = new Client("Adrien", "Kerisit", "ESILV, La defense", "visite de la défense", 2018, 14);
 				string connexionString = "SERVER=localhost;PORT=3306;DATABASE= escapade;UID=escapade;PASSWORD=esilv;SslMode=none";
 				MySqlConnection connexion = new MySqlConnection(connexionString);
 				Demo1(demonstration);
@@ -29,9 +31,14 @@ namespace Escapade
 				connexion.Close();
 				if(result == 0)
 				{
+					Console.WriteLine("Vous n'avez pas de compte actuellement, merci de répondre à quelques questions afin que nous puissions vous créer un compte \n\nVeuillez indiquer votre numero de telephone\n");
+					TypeLine(DEMO_PHONE_NUMBER);
+					Console.WriteLine("\n\n Veuillez renseigner votre email \n");
+					TypeLine(DEMO_EMAIL);
 					connexion.Open();
-					queryResult = Query_mysql_server(connexion, "");
+					queryResult = Query_mysql_server(connexion, "insert into escapade.client(firstname, lastname, phone, adress, email) values('" + demonstration.Firstname +"', '" + demonstration.Lastname + "', '" + DEMO_PHONE_NUMBER + "', '" + demonstration.Adress + "', '" + DEMO_EMAIL + "');" );
 					connexion.Close();
+					Console.WriteLine("Enregistrement terminé !");
 				}
 				else if(result == 1)
 				{
@@ -40,7 +47,12 @@ namespace Escapade
 					int id_client = int.Parse(queryResult[0]);
 					connexion.Close();
 					Console.WriteLine("Succès, votre identifiant client est : " + id_client);
-				}           
+				}
+				XmlSerializer xs = new XmlSerializer(typeof(Client));  // l'outil de sérialisation
+                StreamWriter wr = new StreamWriter("M1.xml");  // accès en écriture à un fichier (texte)
+				xs.Serialize(wr, demonstration); // action de sérialiser en XML l'objet
+                                        // et d'écrire le résultat dans le fichier manipulé par wr
+                wr.Close();
 			}
 			catch(MySqlException ex)
 			{
@@ -58,8 +70,8 @@ namespace Escapade
 			TypeLine(c.Stay);
             Console.WriteLine("\n\nPresque fini, quelles sont vos dates ?\n");
 			TypeLine("Semaine " + c.Week + ", Année " + c.Year);
-            Console.WriteLine("\nNous interrogeons notre base de donnée...");
-			System.Threading.Thread.Sleep(1500);
+            Console.WriteLine("\nNous interrogeons notre base de donnée");
+			TypeLine("...")
 		}
 		public static string[] Query_mysql_server(MySqlConnection connexion, string query)
 		{
