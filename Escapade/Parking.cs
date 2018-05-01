@@ -25,7 +25,7 @@ namespace Escapade
         }
 		public override string ToString()
 		{
-			return "id : " + id + ", theme :" + theme;
+			return "id : " + id + ", borough :" + theme;
 		}
 	}
 }

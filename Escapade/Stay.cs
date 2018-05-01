@@ -19,7 +19,7 @@ namespace Escapade
 		}
 		public override string ToString()
 		{
-			return "Sejour : " + theme + "ème arrondissement";
+			return "borough : " + theme;
 		}
 	}
 }

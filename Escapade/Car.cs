@@ -68,7 +68,7 @@ namespace Escapade
 		}
 		public override string ToString()
 		{
-			return "immatriculation : " + id + ", modele : " + model + ", marque" + brand + ", type " + type + ", disponible : " + available + ", place de parking : " + parking_space + ", superviseur : " + supervisor.ToString() + ", parking : " + parking.ToString();
+			return "id : " + id + ", model : " + model + ", brand : " + brand + ", type " + type + ", available : " + available + ", parking space : " + parking_space + ", supervisor : " + supervisor.ToString() + ", parking : " + parking.ToString();
 		}
 	}
 }

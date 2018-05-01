@@ -11,10 +11,10 @@ namespace Escapade
 		int price;
 		int week;
 		int year;
-		int rating;
-		string ratingDescription;
-		public Deal(Stay stay, Car car, Client client, Housing housing, int price, int week, int year, int rating, string ratingDescription)
+		string state;
+		public Deal(int id, Stay stay, Car car, Client client, Housing housing, int price, int week, int year, int rating, string ratingDescription,string state)
         {
+			this.id = id;
 			this.stay = stay;
 			this.car = car;
 			this.client = client;
@@ -22,10 +22,8 @@ namespace Escapade
 			this.price = price;
 			this.week = week;
 			this.year = year;
-			this.rating = rating;
-			this.ratingDescription = ratingDescription;
         }
-		public Deal() : this(null,null,null,null,-1,-1,-1,-1,"N/C")
+		public Deal() : this(-1,null,null,null,null,-1,-1,-1,-1,"N/C","N/C")
 		{
 			
 		}
@@ -68,20 +66,15 @@ namespace Escapade
 		{
 			get { return price; }
 			set { price = value; }
-		}
-		public int Rating
+		}        
+        public string State
 		{
-			get { return rating; }
-			set { rating = value; }
-		}
-		public string RatingDescription
-		{
-			get { return ratingDescription; }
-			set { ratingDescription = value; }
+			get { return state; }
+			set { state = value; }
 		}
 		public override string ToString()
 		{
-			return "sejour : " + stay.ToString() + ", residence : " + housing.ToString() + ", client : " + client.ToString() + ", voiture : " + car.ToString() + ", prix : " + price + ", note : " + rating + ", commentaires du client : " + ratingDescription;
+			return "id_deal : " + id + ", stay : " + stay.ToString() + ", housing : " + housing.ToString() + ", client : " + client.ToString() + ", car : " + car.ToString() + ", price : " + price;
 		}
 	}
 }

@@ -61,7 +61,7 @@ namespace Escapade
 		}
 		public override string ToString()
 		{
-			return firstname + " " + lastname + ", " + adress + ", num tel : " + phone + ", email : " + email;
+			return "id : " + id + ", firstname : " + firstname + ", lastname : " + lastname + ", adress :" + adress + ", num tel : " + phone + ", email : " + email;
 		}
 	}
 }

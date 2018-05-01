@@ -33,11 +33,11 @@ insert into `escapade`.`client` (`firstname`, `lastname`, `phone`, `adress`, `em
 
 -- insertions in table housing
 
-insert into `escapade`.`housing` (`name`, `theme`) values ('salle du temps', 's01');
-insert into `escapade`.`housing` (`name`, `theme`) values ('kamehouse', 'p02');
-insert into `escapade`.`housing` (`name`, `theme`) values ('namek', 's03');
-insert into `escapade`.`housing` (`name`, `theme`) values ('korin tower', 'p03');
-insert into `escapade`.`housing` (`name`, `theme`) values ('capsule house', 'j03');
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (2, 's01', 5, 1);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (4, 'p02', 4.5, 0);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (1, 's03', 3, 1);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (3, 'p03', 3.5, 1);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (10, 'j03', 4, 0);
 
 -- insertions in table parking
 
@@ -72,14 +72,13 @@ insert into `escapade`.`supervisor` (`firstname`, `lastname`) values ('Cave', 'J
 
 -- insertions in table deal
 
-insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`, `rating`, `ratingDescription`) values (0, 'OU642EF', 0, 0, 1500, 12, 2018, 4, 'On s\'est bien entrainé avec Gohan, voiture jolie, il manque juste la wifi');
-insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`, `rating`, `ratingDescription`) values (1, 'GP654G5', 2, 1, 2000, 12, 2018, 5, 'Bonnes vacances ici');
-insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`, `rating`, `ratingDescription`) values (2, 'DG654GD', 4, 3, 500, 12, 2018, 5, 'Parfait');
-insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`, `rating`, `ratingDescription`) values (2, 'DG68GEG', 5, 4, 300, 12, 2018, 2, 'La cuisine était cassée');
+insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (0, 'OU642EF', 0, 0, 1500, 12, 2018, '');
+insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (1, 'GP654G5', 2, 1, 2000, 12, 2018, '');
+insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (2, 'DG654GD', 4, 3, 500, 12, 2018, '');
+insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (2, 'DG68GEG', 5, 4, 300, 12, 2018, '');
 
 -- insertions in table maintenance
 
 insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values ('OU642EF', 'goku doesn t have a driving licence', 'replaced everything', 13, 2018, 1);
-insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values ('OU642EF', 'la radio a explosé', 'replaced radio', 12, 2018, 1);
+insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values ('OU642EF', 'radio explosed', 'replaced radio', 12, 2018, 1);
 insert into `escapade`.`maintenance` (`id_car`, `cause`, `intervention`, `week`, `year`, `done`) values ('GF6454GD', 'goku let gohan drive', 'replaced everything', 12, 2018, 0);
-

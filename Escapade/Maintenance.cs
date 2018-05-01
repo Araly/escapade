@@ -60,7 +60,7 @@ namespace Escapade
 		}
 		public override string ToString()
 		{
-			return "cause : " + cause + ", intervention : " + intervention + ", semaine : " + week + ", année : " + year + ", disponible : " + done + ", Voiture : " + car.ToString();
+			return "cause : " + cause + ", intervention : " + intervention + ", week : " + week + ", year : " + year + ", done : " + done + ", car : " + car.ToString();
 		}
 	}
 }

@@ -28,8 +28,10 @@ create table `escapade`.`client` (
 
 create table `escapade`.`housing` (
 	`id` int not null auto_increment,
-	`name` varchar(50),
+	`bedroomNumber` int not null,
 	`theme` varchar(3) not null,
+	`rating` int not null,
+	`available` bit not null,
 	primary key (`id`) );
 
 create table `escapade`.`deal` (
@@ -41,8 +43,7 @@ create table `escapade`.`deal` (
 	`price` int not null,
 	`week` int not null,
 	`year` int not null,
-	`rating` int,
-	`ratingDescription` varchar(100),
+	`state` varchar(20) not null,
 	primary key (`id`) );
 
 create table `escapade`.`supervisor` (
