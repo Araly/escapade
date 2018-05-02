@@ -69,7 +69,7 @@ namespace Escapade
                 }
                 else
                 {
-                    Console.WriteLine("\nAvailable car not found, increasing range ...\n");
+                    Console.WriteLine("\nNo available car found, increasing range to other boroughs\n");
 
                     connexion.Open();
                     queryResult = Query_mysql_server(connexion, "select * from car where available = true limit 1;");
@@ -77,10 +77,7 @@ namespace Escapade
                 }
                 if (queryResult[0] != null)
                 {                
-                    string[] temp = queryResult[0].Split(',');
-                    bool av = false;
-                    int av_tmp = int.Parse(temp[4]);
-                    if (av_tmp == 1) { av = true; } // nécessaire pour passer du bit mysql au bool c#
+					string[] temp = queryResult[0].Split(',');
 
                     connexion.Open();
                     queryResult = Query_mysql_server(connexion, "select s.id, firstname, lastname from supervisor s inner join car c on s.id = c.id_supervisor where c.id = '" + temp[0] + "';");
@@ -95,18 +92,50 @@ namespace Escapade
 
                     string[] temp3 = queryResult[0].Split(',');
                     Parking parking = new Parking(int.Parse(temp3[0]), temp3[1]);
-                    Car voiture = new Car(temp[0], temp[1], temp[2], temp[3], av, superviseur, temp[6], parking);
-					Console.WriteLine("\nCar selected : \n" + voiture.ToString());
-					Console.WriteLine("\nQuerying RBNP...\n");
+					demonstration.Car = new Car(temp[0], temp[1], temp[2], temp[3], true, superviseur, temp[6], parking);
+					Console.WriteLine("\nCar selected : \n" + demonstration.Car.ToString());
+                    
+					Console.WriteLine("\nQuerying RBNP for housings\n");
 					Console.WriteLine("\nReceving response from RBNP");
+                    
 					rd = new StreamReader("AirBNPfinal.json");
-					JObject jObject = JObject.Parse(rd.ReadToEnd());
-					JToken jQuery = jObject.SelectToken("$..Housing[?(@.borough == 16),?(@.bedrooms == 1),?(@.overall_satisfaction >= 4.5),?(@.availability == 'yes')]");               
+					JArray jArray = JArray.Parse(rd.ReadToEnd());
+					IEnumerable<JToken> jResult = jArray.SelectTokens("$.[?(@.availability == 'yes' && @.bedrooms == 1 && @.overall_satisfaction >= 4.5 && @.borough == 16)]");
+					//TODO : figure out why host_id isn't attributed correctly => hint : hidden character in property host_id from json file
+					demonstration.Housing = jResult.First().ToObject<Housing>();
+					demonstration.Housing.Availabilty = true; // pas déserialisable à cause de la différence des types string/bool de la propriété entre le fichier json et la classe C#
+					connexion.Open();
+					queryResult = Query_mysql_server(connexion, "select count(id) from housing where host_id = " + demonstration.Housing.Host_id + " and room_id = " + demonstration.Housing.Room_id + ";");
+					connexion.Close();
+					int verification = int.Parse(queryResult[0]);
+					if(jResult != null && verification == 0)
+					{
+                        connexion.Open();
+						queryResult = Query_mysql_server(connexion, "insert into escapade.housing (bedroomNumber, theme, rating, available, host_id, room_id) values (" + demonstration.Housing.Bedrooms + ", '" + demonstration.Housing.Borough + "', " + demonstration.Housing.Overall_satisfaction + ", " + Convert.ToInt32(demonstration.Housing.Availabilty) + ", " + demonstration.Housing.Host_id + ", " + demonstration.Housing.Room_id + ");");
+						connexion.Close();
+					}
+					else if (jResult != null && verification == 1)
+					{
+						Console.WriteLine("housing already registered in our database");
+					}
+					else
+					{
+						Console.WriteLine("\nNo housings available, aborting reservation attempt\n");
+						Console.ReadKey();
+						Environment.Exit(0);
+					}
+					connexion.Open();
+					queryResult = Query_mysql_server(connexion, "select id from housing where host_id = " + demonstration.Housing.Host_id + " and room_id =" + demonstration.Housing.Room_id + ";");
+					connexion.Close();
+					demonstration.Housing.Id = int.Parse(queryResult[0]);
+                    Console.WriteLine("housing found : " + demonstration.Housing.ToString());
 
                 }
                 else
                 {
                     Console.WriteLine("\nNo car available, aborting reservation attempt\n");
+					Console.ReadKey();
+                    Environment.Exit(0);
                 }
                 
             }

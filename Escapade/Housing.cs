@@ -3,51 +3,65 @@ namespace Escapade
 {
     public class Housing
     {
-		int bedroomNumber;
-		string theme;
+		int bedrooms;
+		string borough;
 		int id;
-		int rating;
-		bool available;
-        public Housing(int id, int bedroomNumber, string theme, int rating, bool available)
+		double overall_satisfaction;
+		bool availability;
+		int host_id;
+		int room_id;
+		public Housing(int id, int bedrooms, string borough, double overall_satisfaction, bool availability,int host_id, int room_id)
         {
 			this.id = id;
-			this.bedroomNumber = bedroomNumber;
-			this.available = available;
-			this.theme = theme;
-			this.rating = rating;
+			this.bedrooms = bedrooms;
+			this.availability = availability;
+			this.borough = borough;
+			this.overall_satisfaction = overall_satisfaction;
+			this.host_id = host_id;
+			this.room_id = room_id;
         }
-		public Housing() : this(-1,-1,"N/C",-1,false)
+		public Housing() : this(-1, -1, "N/C", -1, false,-1,-1)
 		{
 			
 		}
-        public int BedroomNumber      
+        public int Bedrooms    
 		{
-			get { return bedroomNumber; }
-			set { bedroomNumber = value; }
+			get { return bedrooms; }
+			set { bedrooms = value; }
 		}
-        public string Theme
+		public string Borough
 		{
-			get { return theme; }
-			set { theme = value; }
+			get { return borough; }
+			set { borough = value; }
 		}
 		public int Id
         {
             get { return id; }
             set { id = value; }
         }
-		public int Rating
+		public double Overall_satisfaction
         {
-            get { return rating; }
-            set { rating = value; }
+			get { return overall_satisfaction; }
+			set { overall_satisfaction = value; }
         }
-		public bool Available
+		public bool Availabilty
         {
-            get { return available; }
-            set { available = value; }
+			get { return availability; }
+			set { availability = value; }
         }
+		public int Host_id
+		{
+			get { return host_id; }
+			set { host_id = value; }
+		}
+		public int Room_id
+		{
+			get { return room_id; }
+			set { room_id = value; }
+		}
 		public override string ToString()
 		{
-			return "id : " + id +  ", borough : " + theme + ", rating :" + rating + ", number of bedrooms : " + bedroomNumber + ", available : " + available;
+			return "id : " + id +  ", borough : " + borough + ", overall_satisfaction :" + overall_satisfaction + ", number of bedrooms : " + bedrooms + ", availability : " + availability + ", host_id = " + host_id + ", room_id = " + room_id;
 		}
 	}
 }

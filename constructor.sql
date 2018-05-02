@@ -3,7 +3,7 @@ use escapade;
 
 create table `escapade`.`stay` (
 	`id` int not null auto_increment,
-	`theme` varchar(3) not null,
+	`theme` varchar(100) not null,
 	primary key (`id`) );
 
 create table `escapade`.`car` (
@@ -32,6 +32,8 @@ create table `escapade`.`housing` (
 	`theme` varchar(3) not null,
 	`rating` int not null,
 	`available` bit not null,
+	`host_id` int not null,
+	`room_id` int not null,
 	primary key (`id`) );
 
 create table `escapade`.`deal` (

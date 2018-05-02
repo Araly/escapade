@@ -1,14 +1,14 @@
 -- insertions in table stay
 
-insert into `escapade`.`stay` (`theme`) values ('s01');
-insert into `escapade`.`stay` (`theme`) values ('p02');
-insert into `escapade`.`stay` (`theme`) values ('s02');
-insert into `escapade`.`stay` (`theme`) values ('s03');
-insert into `escapade`.`stay` (`theme`) values ('p03');
-insert into `escapade`.`stay` (`theme`) values ('j03');
-insert into `escapade`.`stay` (`theme`) values ('s04');
-insert into `escapade`.`stay` (`theme`) values ('p04');
-insert into `escapade`.`stay` (`theme`) values ('s06');
+insert into `escapade`.`stay` (`theme`) values ('Visite des champs elysées');
+insert into `escapade`.`stay` (`theme`) values ('Visite Musée Orsay');
+insert into `escapade`.`stay` (`theme`) values ('Visite Louvre');
+insert into `escapade`.`stay` (`theme`) values ('Tournee de bars de Bastille');
+insert into `escapade`.`stay` (`theme`) values ('Ballade a Montmartre');
+insert into `escapade`.`stay` (`theme`) values ('Pic Nique au Jardin des Plantes');
+insert into `escapade`.`stay` (`theme`) values ('Forfait Premium Aquaboulevard');
+insert into `escapade`.`stay` (`theme`) values ('Tour en hélicoptère');
+insert into `escapade`.`stay` (`theme`) values ('Visite Tour Eiffel');
 
 -- insertions in table car
 
@@ -33,11 +33,11 @@ insert into `escapade`.`client` (`firstname`, `lastname`, `phone`, `adress`, `em
 
 -- insertions in table housing
 
-insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (2, 's01', 5, 1);
-insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (4, 'p02', 4.5, 0);
-insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (1, 's03', 3, 1);
-insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (3, 'p03', 3.5, 1);
-insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`) values (10, 'j03', 4, 0);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`,`host_id`,`room_id`) values (2, '01', 5, 1,1,1);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`,`host_id`,`room_id`) values (4, '02', 4.5, 0,1,2);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`,`host_id`,`room_id`) values (1, '03', 3, 1,2,1);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`,`host_id`,`room_id`) values (3, '03', 3.5, 1,3,2);
+insert into `escapade`.`housing` (`bedroomNumber`, `theme`, `rating`,`available`,`host_id`,`room_id`) values (1, '03', 4, 0,3,5);
 
 -- insertions in table parking
 
@@ -67,15 +67,15 @@ insert into `escapade`.`parking` (`name`, `adress`, `theme`) values ('Roissy', '
 -- insertions in table supervisor
 
 insert into `escapade`.`supervisor` (`firstname`, `lastname`) values ('Patrick', 'Star');
-insert into `escapade`.`supervisor` (`firstname`, `lastname`) values ('Jhon', 'Snow');
-insert into `escapade`.`supervisor` (`firstname`, `lastname`) values ('Cave', 'Jhonson');
+insert into `escapade`.`supervisor` (`firstname`, `lastname`) values ('Jon', 'Snow');
+insert into `escapade`.`supervisor` (`firstname`, `lastname`) values ('Cave', 'Johnson');
 
 -- insertions in table deal
 
-insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (0, 'OU642EF', 0, 0, 1500, 12, 2018, '');
-insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (1, 'GP654G5', 2, 1, 2000, 12, 2018, '');
-insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (2, 'DG654GD', 4, 3, 500, 12, 2018, '');
-insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (2, 'DG68GEG', 5, 4, 300, 12, 2018, '');
+insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (0, 'OU642EF', 0, 0, 1500, 12, 2018, 'confirmed');
+insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (1, 'GP654G5', 2, 1, 2000, 12, 2018, 'confirmed');
+insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (2, 'DG654GD', 4, 3, 500, 12, 2018, 'confirmed');
+insert into `escapade`.`deal` (`id_stay`, `id_car`, `id_client`, `id_housing`, `price`, `week`, `year`,`state`) values (2, 'DG68GEG', 5, 4, 300, 12, 2018, 'confirmed');
 
 -- insertions in table maintenance
 
