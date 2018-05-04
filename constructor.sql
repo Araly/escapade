@@ -34,6 +34,7 @@ create table `escapade`.`housing` (
 	`available` bit not null,
 	`host_id` int not null,
 	`room_id` int not null,
+	`price` int not null,
 	primary key (`id`) );
 
 create table `escapade`.`deal` (
@@ -42,7 +43,6 @@ create table `escapade`.`deal` (
 	`id_car` varchar(10) not null,
 	`id_client` int not null,
 	`id_housing` int not null,
-	`price` int not null,
 	`week` int not null,
 	`year` int not null,
 	`state` varchar(20) not null,

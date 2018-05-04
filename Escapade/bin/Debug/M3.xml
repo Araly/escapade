@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Deal [
+<!ELEMENT Deal (State)>
+<!ELEMENT State (#PCDATA)>
+<!ATTLIST Deal Id CDATA #REQUIRED>
+]>
+<Deal Id="5">	
+ <State>confirmed</State>
+</Deal>

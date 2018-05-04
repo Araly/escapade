@@ -10,8 +10,9 @@ namespace Escapade
 		int week;
 		int year;
 		bool done;
-		public Maintenance(Car car, string cause, string intervention, int week, int year, bool done)
+		public Maintenance(int id, Car car, string cause, string intervention, int week, int year, bool done)
 		{
+			this.id = id;
 			this.car = car;
 			this.cause = cause;
 			this.intervention = intervention;
@@ -19,7 +20,7 @@ namespace Escapade
 			this.year = year;
 			this.done = done;
 		}
-		public Maintenance() : this(null, "N/C", "N/C", -1, -1, false)
+		public Maintenance() : this(-1, null, "N/C", "N/C", -1, -1, false)
 		{
 			
 		}
@@ -38,7 +39,7 @@ namespace Escapade
 			get { return week; }
 			set { week = value; }
 		}
-		public Car Voiture
+		public Car Car
 		{
 			get { return car; }
 			set { car = value; }

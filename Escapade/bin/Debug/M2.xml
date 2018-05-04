@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Deal xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Id>6</Id>
+  <Year>2018</Year>
+  <Week>14</Week>
+  <Car>
+    <Id>DG56784F</Id>
+    <Model> h684</Model>
+    <Brand> Capsule</Brand>
+    <Type> berline</Type>
+    <Available>true</Available>
+    <Parking_space> A0</Parking_space>
+    <Supervisor>
+      <Firstname> Patrick</Firstname>
+      <Lastname> Star</Lastname>
+      <Id>1</Id>
+    </Supervisor>
+    <Parking>
+      <Id>1</Id>
+      <Theme> 01</Theme>
+      <Name> Rivoli</Name>
+      <Adress> 2 Rue Boucher</Adress>
+    </Parking>
+  </Car>
+  <Stay>
+    <Theme>visite de la defense</Theme>
+    <Id>10</Id>
+  </Stay>
+  <Housing>
+    <Bedrooms>1</Bedrooms>
+    <Borough>16</Borough>
+    <Id>6</Id>
+    <Overall_satisfaction>4.5</Overall_satisfaction>
+    <Availabilty>true</Availabilty>
+    <Host_id>62101</Host_id>
+    <Room_id>2893116</Room_id>
+    <Price>114</Price>
+  </Housing>
+  <Client>
+    <Firstname>Adrien</Firstname>
+    <Lastname>Kerisit</Lastname>
+    <Id>7</Id>
+    <Adress>ESILV, La defense</Adress>
+    <Phone>0782453482</Phone>
+    <Email>adrien.kerisit@devinci.fr</Email>
+  </Client>
+  <State>unconfirmed</State>
+</Deal>

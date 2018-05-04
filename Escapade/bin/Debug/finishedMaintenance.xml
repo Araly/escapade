@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE Maintenance [
+<!ELEMENT Maintenance (Done)>
+<!ATTLIST Maintenance Done (true|false) #REQUIRED>
+]>
+<Maintenance done = "true"></Maintenance>

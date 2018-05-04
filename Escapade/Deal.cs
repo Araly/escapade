@@ -8,22 +8,21 @@ namespace Escapade
 		Car car;
 		Client client;
 		Housing housing;
-		int price;
 		int week;
 		int year;
 		string state;
-		public Deal(int id, Stay stay, Car car, Client client, Housing housing, int price, int week, int year, int rating, string ratingDescription,string state)
+		public Deal(int id, Stay stay, Car car, Client client, Housing housing, int week, int year, string state)
         {
 			this.id = id;
 			this.stay = stay;
 			this.car = car;
 			this.client = client;
 			this.housing = housing;
-			this.price = price;
 			this.week = week;
 			this.year = year;
+			this.state = state;
         }
-		public Deal() : this(-1,null,null,null,null,-1,-1,-1,-1,"N/C","N/C")
+		public Deal() : this(-1,null,null,null,null,-1,-1,"N/C")
 		{
 			
 		}
@@ -61,12 +60,7 @@ namespace Escapade
 		{
 			get { return client; }
 			set { client = value; }
-		}
-        public int Price
-		{
-			get { return price; }
-			set { price = value; }
-		}        
+		}    
         public string State
 		{
 			get { return state; }
@@ -74,7 +68,7 @@ namespace Escapade
 		}
 		public override string ToString()
 		{
-			return "id_deal : " + id + ", stay : " + stay.ToString() + ", housing : " + housing.ToString() + ", client : " + client.ToString() + ", car : " + car.ToString() + ", price : " + price;
+			return "id_deal : " + id + ", stay : " + stay.ToString() + ", housing : " + housing.ToString() + ", client : " + client.ToString() + ", car : " + car.ToString();
 		}
 	}
 }

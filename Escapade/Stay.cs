@@ -4,11 +4,13 @@ namespace Escapade
     public class Stay
     {
 		string theme;
-        public Stay(string theme)
+		int id;
+        public Stay(int id, string theme)
         {
+			this.id = id;
 			this.theme = theme;
         }
-		public Stay() : this("N/C")
+		public Stay() : this(-1,"N/C")
 		{
 			
 		}
@@ -17,9 +19,14 @@ namespace Escapade
 			get { return theme; }
 			set { theme = value; }
 		}
+        public int Id
+		{
+			get { return id; }
+			set { id = value; }
+		}
 		public override string ToString()
 		{
-			return "borough : " + theme;
+			return "id : " + id + ", theme : " + theme;
 		}
 	}
 }

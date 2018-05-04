@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Car xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Id>DG56784F</Id>
+  <Model> h684</Model>
+  <Brand> Capsule</Brand>
+  <Type> berline</Type>
+  <Available>true</Available>
+  <Parking_space> A0</Parking_space>
+  <Supervisor>
+    <Firstname> Patrick</Firstname>
+    <Lastname> Star</Lastname>
+    <Id>1</Id>
+  </Supervisor>
+  <Parking>
+    <Id>1</Id>
+    <Theme> 01</Theme>
+    <Name> Rivoli</Name>
+    <Adress> 2 Rue Boucher</Adress>
+  </Parking>
+</Car>

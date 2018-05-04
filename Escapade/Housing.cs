@@ -10,7 +10,8 @@ namespace Escapade
 		bool availability;
 		int host_id;
 		int room_id;
-		public Housing(int id, int bedrooms, string borough, double overall_satisfaction, bool availability,int host_id, int room_id)
+		int price;
+		public Housing(int id, int bedrooms, string borough, double overall_satisfaction, bool availability,int host_id, int room_id, int price)
         {
 			this.id = id;
 			this.bedrooms = bedrooms;
@@ -19,8 +20,9 @@ namespace Escapade
 			this.overall_satisfaction = overall_satisfaction;
 			this.host_id = host_id;
 			this.room_id = room_id;
+			this.price = price;
         }
-		public Housing() : this(-1, -1, "N/C", -1, false,-1,-1)
+		public Housing() : this(-1, -1, "N/C", -1, false,-1,-1,-1)
 		{
 			
 		}
@@ -59,9 +61,14 @@ namespace Escapade
 			get { return room_id; }
 			set { room_id = value; }
 		}
+		public int Price
+        {
+            get { return price; }
+            set { price = value; }
+        }    
 		public override string ToString()
 		{
-			return "id : " + id +  ", borough : " + borough + ", overall_satisfaction :" + overall_satisfaction + ", number of bedrooms : " + bedrooms + ", availability : " + availability + ", host_id = " + host_id + ", room_id = " + room_id;
+			return "id : " + id +  ", borough : " + borough + ", overall_satisfaction :" + overall_satisfaction + ", number of bedrooms : " + bedrooms + ", availability : " + availability + ", host_id = " + host_id + ", room_id = " + room_id + ", price : " + price;
 		}
 	}
 }

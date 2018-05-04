@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE Maintenance [
+<!ELEMENT Maintenance (Cause,Intervention, Week, Year)>
+<!ELEMENT Cause (#PCDATA)>
+<!ELEMENT Intervention (#PCDATA)>
+<!ELEMENT Week (#PCDATA)>
+<!ELEMENT Year (#PCDATA)>
+<!ATTLIST Maintenance Done CDATA #REQUIRED>
+]>
+<Maintenance done = "false">
+<Cause>Insectes écracés sur le parchoc, fiente de pigeon sur le toit</Cause>
+<Intervention>Nettoyage Complet</Intervention>
+<Week>14</Week>
+<Year>2018</Year>
+</Maintenance>

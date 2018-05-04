@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE Parking [
+<!ELEMENT Parking (Theme)>
+<!ELEMENT Theme (#PCDATA)>
+]>
+
+<Parking>
+<Theme>01</Theme>
+</Parking>

@@ -10,8 +10,9 @@ namespace Escapade
 		string phone;
 		string email;
         
-		public Client(string firstname, string lastname, string phone, string adress, string email)
+		public Client(int id, string firstname, string lastname, string phone, string adress, string email)
 		{
+			this.id = id;
 			this.firstname = firstname;
             this.lastname = lastname;
             this.adress = adress;
@@ -24,7 +25,7 @@ namespace Escapade
             this.lastname = lastname;
             this.adress = adress;
 		}
-		public Client() : this("N/C","N/C","N/C","N/C","N/C")
+		public Client() : this(-1,"N/C","N/C","N/C","N/C","N/C")
 		{
 			
 		}
