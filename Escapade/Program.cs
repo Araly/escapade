@@ -145,10 +145,10 @@ namespace Escapade
                     Console.WriteLine("\nE5 DONE : PRESS ANY KEY TO CONTINUE");
                     Console.ReadKey();
                     connexion.Open();
-                    queryResult = Query_mysql_server(connexion, "select count(id) from deal where id_stay =" + demonstration.Stay.Id + " and id_car ='" + demonstration.Car.Id + "' and id_client =" + demonstration.Client.Id + " and id_housing =" + demonstration.Housing.Id + " and week =" + demonstration.Week + " and year =" + demonstration.Year + " and state ='" + demonstration.State + "'; ");
+					queryResult = Query_mysql_server(connexion, "select count(id) from deal where id_client =" + demonstration.Client.Id + " and week =" + demonstration.Week + " and year =" + demonstration.Year + ";");
                     connexion.Close();
-					Console.WriteLine("select count(id) from deal where id_stay =" + demonstration.Stay.Id + " and id_car ='" + demonstration.Car.Id + "' and id_client =" + demonstration.Client.Id + " and id_housing =" + demonstration.Housing.Id + " and week =" + demonstration.Week + " and year =" + demonstration.Year + "; ");
-					if (int.Parse(queryResult[0]) == 0) // Problem : query not working, result full of null
+				    verification = int.Parse(queryResult[0]);
+					if (verification == 0) // Problem : query not working, result full of null
                     {
                         connexion.Open();
                         queryResult = Query_mysql_server(connexion, "insert into escapade.deal (id_stay, id_car, id_client, id_housing, week, year, state) values (" + demonstration.Stay.Id + ", '" + demonstration.Car.Id + "', " + demonstration.Client.Id + ", " + demonstration.Housing.Id + ", " + demonstration.Week + ", " + demonstration.Year + ", '" + demonstration.State + "');");
@@ -156,7 +156,7 @@ namespace Escapade
                     }
 
                     connexion.Open();
-                    queryResult = Query_mysql_server(connexion, "select id from deal where id_stay =" + demonstration.Stay.Id + " and id_car ='" + demonstration.Car.Id + "' and id_client =" + demonstration.Client.Id + " and id_housing =" + demonstration.Housing.Id + " and week =" + demonstration.Week + " and year =" + demonstration.Year + " and state ='" + demonstration.State + "'; ");
+                    queryResult = Query_mysql_server(connexion, "select id from deal where id_client =" + demonstration.Client.Id + " and week =" + demonstration.Week + " and year =" + demonstration.Year + ";");
                     connexion.Close();
 
                     demonstration.Id = int.Parse(queryResult[0]);
@@ -295,10 +295,9 @@ namespace Escapade
 		{
             MySqlCommand command = connexion.CreateCommand();
             command.CommandText = query; // exemple de requete bien-sur !
-            
             MySqlDataReader reader;
             reader = command.ExecuteReader();
-			string[] toReturn = new string[10]; //pas plus de 10 individus par requête
+			string[] toReturn = new string[reader.FieldCount]; //pas plus de 10 individus par requête
 			int individu = 0;
             while (reader.Read())                           // parcours ligne par ligne
             {
