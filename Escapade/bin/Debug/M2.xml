@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Deal xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Id>5</Id>
+  <Id>8</Id>
   <Year>2018</Year>
   <Week>14</Week>
   <Car>
@@ -31,7 +31,7 @@
     <Borough>16</Borough>
     <Id>6</Id>
     <Overall_satisfaction>4.5</Overall_satisfaction>
-    <Availabilty>true</Availabilty>
+    <Availabilty>false</Availabilty>
     <Host_id>62101</Host_id>
     <Room_id>2893116</Room_id>
     <Price>114</Price>

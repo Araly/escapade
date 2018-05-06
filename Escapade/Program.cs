@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Adrien KERISIT and Nathan IMMACOLATO
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Xml.XPath;
 using System.IO;
 using System.Xml.Serialization;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Escapade
 {
@@ -18,7 +20,8 @@ namespace Escapade
 
         public static void Main(string[] args)
         {
-			string connexionString = "SERVER=localhost;PORT=3306;DATABASE= escapade;UID=akeris;SslMode=none";
+			//string connexionString = "SERVER=localhost;PORT=3306;DATABASE= escapade;UID=akeris;SslMode=none";
+			string connexionString = "SERVER=fboisson.ddns.net;PORT=3306;DATABASE= KERI_ADRI;UID= S6-KERI-ADRI;PWD= 8077;";
             MySqlConnection connexion = new MySqlConnection(connexionString);
 
 			Deal demonstration = null;
@@ -42,7 +45,7 @@ namespace Escapade
                     Console.WriteLine("\nClient not found, inserting new client to database\n");
 
                     connexion.Open();
-                    queryResult = Query_mysql_server(connexion, "insert into escapade.client(firstname, lastname, phone, adress, email) values('" + demonstration.Client.Firstname + "', '" + demonstration.Client.Lastname + "', '" + demonstration.Client.Phone + "', '" + demonstration.Client.Adress + "', '" + demonstration.Client.Email + "');");
+                    queryResult = Query_mysql_server(connexion, "insert into KERI_ADRI.client(firstname, lastname, phone, adress, email) values('" + demonstration.Client.Firstname + "', '" + demonstration.Client.Lastname + "', '" + demonstration.Client.Phone + "', '" + demonstration.Client.Adress + "', '" + demonstration.Client.Email + "');");
                     connexion.Close();
 
                     Console.WriteLine("\nInsertion successful\nDouble-checking\n");
@@ -53,7 +56,7 @@ namespace Escapade
                 if (int.Parse(queryResult[0]) == 0)
                 {
                     connexion.Open();
-                    queryResult = Query_mysql_server(connexion, "insert into escapade.stay(theme) values('" + demonstration.Stay.Theme + "');");
+                    queryResult = Query_mysql_server(connexion, "insert into KERI_ADRI.stay(theme) values('" + demonstration.Stay.Theme + "');");
                     connexion.Close();
                 }
                 connexion.Open();
@@ -114,9 +117,15 @@ namespace Escapade
                     Console.WriteLine("\nE4 DONE : PRESS ANY KEY TO CONTINUE");
                     Console.ReadKey();
                     IEnumerable<JToken> jResult = jArray.SelectTokens("$.[?(@.availability == 'yes' && @.bedrooms == 1 && @.overall_satisfaction >= 4.5 && @.borough == 16)]");
-
                     demonstration.Housing = jResult.First().ToObject<Housing>();
-                    demonstration.Housing.Availabilty = true; // pas déserialisable à cause de la différence des types string/bool de la propriété entre le fichier json et la classe C#
+                    demonstration.Housing.Availabilty = false;
+					StreamWriter wr = new StreamWriter("RBNP_response.json");
+					JsonSerializer serializer = new JsonSerializer();
+					JsonWriter writer = new JsonTextWriter(wr);
+					serializer.Serialize(writer, demonstration.Housing);
+					writer.Close();
+					wr.Close();
+					Console.WriteLine("Housing serialized, sending file : RBNP_response.json to RBNP");
                     connexion.Open();
                     queryResult = Query_mysql_server(connexion, "select count(id) from housing where host_id = " + demonstration.Housing.Host_id + " and room_id = " + demonstration.Housing.Room_id + ";");
                     connexion.Close();
@@ -124,7 +133,7 @@ namespace Escapade
                     if (jResult != null && verification == 0)
                     {
                         connexion.Open();
-                        queryResult = Query_mysql_server(connexion, "insert into escapade.housing (bedroomNumber, theme, rating, available, host_id, room_id, price) values (" + demonstration.Housing.Bedrooms + ", '" + demonstration.Housing.Borough + "', " + demonstration.Housing.Overall_satisfaction + ", " + Convert.ToInt32(demonstration.Housing.Availabilty) + ", " + demonstration.Housing.Host_id + ", " + demonstration.Housing.Room_id + ", " + demonstration.Housing.Price + ");");
+                        queryResult = Query_mysql_server(connexion, "insert into KERI_ADRI.housing (bedroomNumber, theme, rating, available, host_id, room_id, price) values (" + demonstration.Housing.Bedrooms + ", '" + demonstration.Housing.Borough + "', " + demonstration.Housing.Overall_satisfaction + ", " + Convert.ToInt32(demonstration.Housing.Availabilty) + ", " + demonstration.Housing.Host_id + ", " + demonstration.Housing.Room_id + ", " + demonstration.Housing.Price + ");");
                         connexion.Close();
                     }
                     else if (jResult != null && verification == 1)
@@ -151,7 +160,7 @@ namespace Escapade
 					if (verification == 0) // Problem : query not working, result full of null
                     {
                         connexion.Open();
-                        queryResult = Query_mysql_server(connexion, "insert into escapade.deal (id_stay, id_car, id_client, id_housing, week, year, state) values (" + demonstration.Stay.Id + ", '" + demonstration.Car.Id + "', " + demonstration.Client.Id + ", " + demonstration.Housing.Id + ", " + demonstration.Week + ", " + demonstration.Year + ", '" + demonstration.State + "');");
+						queryResult = Query_mysql_server(connexion, "insert into KERI_ADRI.deal (id_stay, id_car, id_client, id_housing, week, year, state) values (" + demonstration.Stay.Id + ", '" + demonstration.Car.Id + "', " + demonstration.Client.Id + ", " + demonstration.Housing.Id + ", " + demonstration.Week + ", " + demonstration.Year + ", '" + demonstration.State + "');");
                         connexion.Close();
                     }
 
@@ -162,7 +171,7 @@ namespace Escapade
                     demonstration.Id = int.Parse(queryResult[0]);
                     Console.WriteLine("Deal registered in database : " + demonstration.ToString() + "\n");
 
-                    StreamWriter wr = new StreamWriter("M2.xml");
+                    wr = new StreamWriter("M2.xml");
                     xs.Serialize(wr, demonstration);
                     wr.Close();
                     Console.WriteLine("Object Deal Serialized\nSerialized Xml M2 message sent to client\n");
@@ -193,6 +202,7 @@ namespace Escapade
                     }
                     Console.WriteLine("\nE7 DONE : PRESS ANY KEY TO CONTINUE");
                     Console.ReadKey();
+					Console.Clear();
 					Console.WriteLine("CHECK OUT : initiated, Xml file receved with client's car location\n");
                     doc = new XPathDocument("checkOut.xml");
                     nav = doc.CreateNavigator();
@@ -261,6 +271,28 @@ namespace Escapade
                     Console.WriteLine("Car available\n");
                     Console.WriteLine("\nE5 : DONE, PRESS ANY KEY TO CONTINUE");
                     Console.ReadKey();
+					Console.Clear();
+					Console.WriteLine("\n DASHBOARD : \n");
+					connexion.Open();
+					queryResult = Query_mysql_server(connexion, "select * from maintenance where id_car ='" + demonstration.Car.Id + "';");
+					connexion.Close();
+					Console.WriteLine("\nCurrent car maintenance history :\n\nid, id_car, cause, intervention, week, year, done\n");
+					DisplayArray(queryResult);
+					Console.WriteLine("E1 : DONE, PRESS ANY KEY TO CONTINUE");
+					Console.ReadKey();
+					connexion.Open();
+					queryResult = Query_mysql_server(connexion, "select * from deal where id_client =" + demonstration.Client.Id + ";");
+					connexion.Close();
+					Console.WriteLine("\nCurrent client deal history :\n\nid, id_stay, id_car, id_client, id_housing, week, year, state\n");
+					DisplayArray(queryResult);
+					Console.WriteLine("E2 : DONE, PRESS ANY KEY TO CONTINUE");
+					Console.ReadKey();
+					connexion.Open();
+					//queryResult = Query_mysql_server(connexion, "select id_car from ( select count(id_car) as nbLoc, id_car from deal group by id_car order by nbLoc desc limit 1 ) as bestCar;");
+					queryResult = Query_mysql_server(connexion, "select count(id_car) as nbLoc, id_car from deal group by id_car order by nbLoc desc;");
+					connexion.Close();
+					Console.WriteLine("\n Most rented cars :\n\nnumber of rent, id_car\n");
+					DisplayArray(queryResult);               
                 }
                 else
                 {
@@ -297,7 +329,7 @@ namespace Escapade
             command.CommandText = query; // exemple de requete bien-sur !
             MySqlDataReader reader;
             reader = command.ExecuteReader();
-			string[] toReturn = new string[reader.FieldCount]; //pas plus de 10 individus par requête
+			string[] toReturn = new string[10]; //pas plus de 10 individus par requête
 			int individu = 0;
             while (reader.Read())                           // parcours ligne par ligne
             {
@@ -319,14 +351,12 @@ namespace Escapade
             }
 			return toReturn;
         }
-		public static void TypeLine(string line)
-        {
-			System.Threading.Thread.Sleep(1500);
-            for (int i = 0; i < line.Length; i++)
-            {
-                Console.Write(line[i]);
-                System.Threading.Thread.Sleep(150); // Sleep for 150 milliseconds
-            }
-        }
+		public static void DisplayArray(string [] tab)
+		{
+			for (int i = 0; i < tab.Length; i++)
+			{
+				Console.WriteLine(tab[i] + "\n");
+			}
+		}
     }
 }

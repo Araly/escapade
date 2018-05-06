@@ -1,12 +1,11 @@
-create database `escapade`;
-use escapade;
+use KERI_ADRI;
 
-create table `escapade`.`stay` (
+create table `KERI_ADRI`.`stay` (
 	`id` int not null auto_increment,
 	`theme` varchar(100) not null,
 	primary key (`id`) );
 
-create table `escapade`.`car` (
+create table `KERI_ADRI`.`car` (
 	`id` varchar(10) not null,
 	`brand` varchar(50) not null,
 	`type` enum('berline', 'cabriolet') not null,
@@ -17,7 +16,7 @@ create table `escapade`.`car` (
 	`id_parking` int,
 	primary key (`id`) );
 
-create table `escapade`.`client` (
+create table `KERI_ADRI`.`client` (
 	`id` int not null auto_increment,
 	`firstname` varchar(20) not null,
 	`lastname` varchar(20) not null,
@@ -26,7 +25,7 @@ create table `escapade`.`client` (
 	`email` varchar(50) not null,
 	primary key (`id`) );
 
-create table `escapade`.`housing` (
+create table `KERI_ADRI`.`housing` (
 	`id` int not null auto_increment,
 	`bedroomNumber` int not null,
 	`theme` varchar(3) not null,
@@ -37,7 +36,7 @@ create table `escapade`.`housing` (
 	`price` int not null,
 	primary key (`id`) );
 
-create table `escapade`.`deal` (
+create table `KERI_ADRI`.`deal` (
 	`id` int not null auto_increment,
 	`id_stay` int not null,
 	`id_car` varchar(10) not null,
@@ -48,20 +47,20 @@ create table `escapade`.`deal` (
 	`state` varchar(20) not null,
 	primary key (`id`) );
 
-create table `escapade`.`supervisor` (
+create table `KERI_ADRI`.`supervisor` (
 	`id` int not null auto_increment,
 	`firstname` varchar(20) not null,
 	`lastname` varchar(20) not null,
 	primary key (`id`) );
 
-create table `escapade`.`parking` (
+create table `KERI_ADRI`.`parking` (
 	`id` int not null auto_increment,
 	`name` varchar(50) not null,
 	`adress` varchar(100) not null,
 	`theme` varchar(3) not null,
 	primary key (`id`) );
 
-create table `escapade`.`maintenance` (
+create table `KERI_ADRI`.`maintenance` (
 	`id` int not null auto_increment,
 	`id_car` varchar(10) not null,
 	`cause` varchar(100) not null,
