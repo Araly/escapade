@@ -21,7 +21,7 @@ namespace Escapade
         public static void Main(string[] args)
         {
 			//string connexionString = "SERVER=localhost;PORT=3306;DATABASE= escapade;UID=akeris;SslMode=none";
-			string connexionString = "SERVER=fboisson.ddns.net;PORT=3306;DATABASE= KERI_ADRI;UID= S6-KERI-ADRI;PWD= 8077;";
+			string connexionString = "SERVER=fboisson.ddns.net;PORT=3306;DATABASE= KERI_ADRI;UID= S6-KERI-ADRI;PWD= 8077;SslMode = none";
             MySqlConnection connexion = new MySqlConnection(connexionString);
 
 			Deal demonstration = null;
@@ -289,9 +289,9 @@ namespace Escapade
 					Console.ReadKey();
 					connexion.Open();
 					//queryResult = Query_mysql_server(connexion, "select id_car from ( select count(id_car) as nbLoc, id_car from deal group by id_car order by nbLoc desc limit 1 ) as bestCar;");
-					queryResult = Query_mysql_server(connexion, "select count(id_car) as nbLoc, id_car from deal group by id_car order by nbLoc desc;");
+					queryResult = Query_mysql_server(connexion, "select count(d.id_car) as nbLoc, d.id_car, c.brand, c.model from deal d inner join car c on d.id_car = c.id group by id_car order by nbLoc desc;");
 					connexion.Close();
-					Console.WriteLine("\n Most rented cars :\n\nnumber of rent, id_car\n");
+					Console.WriteLine("\n Most rented cars :\n\nnumber of rent, id_car, brand, model\n");
 					DisplayArray(queryResult);               
                 }
                 else
