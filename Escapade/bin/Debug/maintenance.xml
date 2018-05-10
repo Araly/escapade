@@ -8,7 +8,7 @@
 <!ATTLIST Maintenance Done CDATA #REQUIRED>
 ]>
 <Maintenance done = "false">
-<Cause>Insectes écracés sur le parchoc, fiente de pigeon sur le toit</Cause>
+<Cause>Insectes écracés sur le parchoc et fiente de pigeon sur le toit</Cause>
 <Intervention>Nettoyage Complet</Intervention>
 <Week>14</Week>
 <Year>2018</Year>

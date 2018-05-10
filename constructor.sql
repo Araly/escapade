@@ -3,6 +3,7 @@ use KERI_ADRI;
 create table `KERI_ADRI`.`stay` (
 	`id` int not null auto_increment,
 	`theme` varchar(100) not null,
+	`borough` varchar(2) not null,
 	primary key (`id`) );
 
 create table `KERI_ADRI`.`car` (

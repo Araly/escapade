@@ -6,6 +6,7 @@
  <!ELEMENT Year (#PCDATA)>
  <!ELEMENT Week (#PCDATA)>
  <!ELEMENT Theme (#PCDATA)>
+ <!ELEMENT Borough (#PCDATA)>
  <!ELEMENT Firstname (#PCDATA)>
  <!ELEMENT Lastname (#PCDATA)>
  <!ELEMENT Adress (#PCDATA)>
@@ -20,6 +21,7 @@
   </Client>
   <Stay>
     <Theme>visite de la defense</Theme>
+    <Borough>16</Borough>
   </Stay>
   <Year>2018</Year>
   <Week>14</Week>

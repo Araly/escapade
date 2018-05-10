@@ -1,14 +1,14 @@
 -- insertions in table stay
 
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Visite des champs elysées');
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Visite Musée Orsay');
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Visite Louvre');
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Tournee de bars de Bastille');
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Ballade a Montmartre');
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Pic Nique au Jardin des Plantes');
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Forfait Premium Aquaboulevard');
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Tour en hélicoptère');
-insert into `KERI_ADRI`.`stay` (`theme`) values ('Visite Tour Eiffel');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Visite des champs elysées','08');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Visite Musée Orsay','07');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Visite Louvre','01');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Tournee de bars de Bastille','11');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Ballade a Montmartre','18');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Pic Nique au Jardin des Plantes','05');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Forfait Premium Aquaboulevard','15');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Tour en hélicoptère à la tour montparnasse','15');
+insert into `KERI_ADRI`.`stay` (`theme`,`borough`) values ('Visite Tour Eiffel','07');
 
 -- insertions in table car
 

@@ -56,7 +56,7 @@ namespace Escapade
                 if (int.Parse(queryResult[0]) == 0)
                 {
                     connexion.Open();
-                    queryResult = Query_mysql_server(connexion, "insert into KERI_ADRI.stay(theme) values('" + demonstration.Stay.Theme + "');");
+					queryResult = Query_mysql_server(connexion, "insert into KERI_ADRI.stay(theme, borough) values('" + demonstration.Stay.Theme + "', '" + demonstration.Stay.Borough + "');");
                     connexion.Close();
                 }
                 connexion.Open();
@@ -73,7 +73,7 @@ namespace Escapade
                 Console.WriteLine("\nSearching for an available car in the area\n");
 
                 connexion.Open();
-                queryResult = Query_mysql_server(connexion, "select * from car c inner join parking p on c.id_parking = p.theme where p.theme = '" + demonstration.Stay.Theme + "' and c.available = true;");
+				queryResult = Query_mysql_server(connexion, "select * from car c inner join parking p on c.id_parking = p.theme where p.theme = '" + demonstration.Stay.Borough + "' and c.available = true limit 1;");
                 connexion.Close();
 
                 if (queryResult[0] != null)
@@ -100,7 +100,7 @@ namespace Escapade
                     Supervisor superviseur = new Supervisor(int.Parse(temp2[0]), temp2[1], temp2[2]);
 
                     connexion.Open();
-                    queryResult = Query_mysql_server(connexion, "select * from parking p inner join car c on p.id = c.id_parking where c.id_parking ='" + temp[7] + "';");
+					queryResult = Query_mysql_server(connexion, "select * from parking p inner join car c on p.id = c.id_parking where c.id_parking ='" + temp[7] + "' and c.id = '" + temp[0] +"';");
                     connexion.Close();
 
                     temp2 = queryResult[0].Split(',');
