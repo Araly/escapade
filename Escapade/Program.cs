@@ -224,7 +224,7 @@ namespace Escapade
                     Console.WriteLine("\nmessage sent to supervisor : " + demonstration.Car.Supervisor.ToString() + "\n");
                     
                     xs = new XmlSerializer(typeof(Car));
-                    wr = new StreamWriter("carInfoSupervisor");
+                    wr = new StreamWriter("carInfoSupervisor.xml");
                     xs.Serialize(wr, demonstration.Car);
                     wr.Close();
                     Console.WriteLine("\nE2 : DONE, PRESS ANY KEY TO CONTINUE");
