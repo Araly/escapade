@@ -266,7 +266,7 @@ namespace Escapade
                     Console.WriteLine("Maintenance finished");
                     maintenance.Car.Available = true;
                     connexion.Open();
-					queryResult = Query_mysql_server(connexion, "update car c set available =" + Convert.ToInt32(maintenance.Car.Available) + " where id='" + maintenance.Car.Id + "';");
+					queryResult = Query_mysql_server(connexion, "update car c set c.available =" + Convert.ToInt32(maintenance.Car.Available) + " where c.id='" + maintenance.Car.Id + "';");
                     connexion.Close();
                     Console.WriteLine("Car available\n");
                     Console.WriteLine("\nE5 : DONE, PRESS ANY KEY TO CONTINUE");
