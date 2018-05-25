@@ -92,6 +92,10 @@ namespace Escapade
                 {
                     string[] temp = queryResult[0].Split(',');
 
+					connexion.Open();
+                    queryResult = Query_mysql_server(connexion, "update car c set c.id_parking =" + demonstration.Stay.Borough + " where c.id ='" + temp[0] + "';");
+                    connexion.Close();
+
                     connexion.Open();
                     queryResult = Query_mysql_server(connexion, "select s.id, firstname, lastname from supervisor s inner join car c on s.id = c.id_supervisor where c.id = '" + temp[0] + "';");
                     connexion.Close();
@@ -100,7 +104,7 @@ namespace Escapade
                     Supervisor superviseur = new Supervisor(int.Parse(temp2[0]), temp2[1], temp2[2]);
 
                     connexion.Open();
-					queryResult = Query_mysql_server(connexion, "select * from parking p inner join car c on p.id = c.id_parking where c.id_parking ='" + temp[7] + "' and c.id = '" + temp[0] +"';");
+					queryResult = Query_mysql_server(connexion, "select * from parking p inner join car c on p.id = c.id_parking where c.id_parking ='" + demonstration.Stay.Borough + "' and c.id = '" + temp[0] +"';");
                     connexion.Close();
 
                     temp2 = queryResult[0].Split(',');
